@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💘</title>
+
+<style>
+    body {
+        background: #ffe6f0;
+        font-family: 'Comic Sans MS', cursive;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .box {
+        background: white;
+        padding: 40px;
+        border-radius: 25px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        position: relative;
+        width: 350px;
+        height: 300px;
+    }
+
+    h1 {
+        color: #ff4d88;
+    }
+
+    #timer {
+        color: #ff4d88;
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    button {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 20px;
+        font-size: 18px;
+        cursor: pointer;
+        position: absolute;
+        transition: all 0.3s ease;
+    }
+
+    #yes {
+        background: #ff66a3;
+        color: white;
+        left: 80px;
+        top: 170px;
+    }
+
+    #no {
+        background: #333;
+        color: white;
+        left: 190px;
+        top: 170px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="box" id="box">
+    <div id="timer">Time left: 10s</div>
+    <h1>Do you love me? 💖</h1>
+
+    <button id="yes">Yes 💕</button>
+    <button id="no">No 💔</button>
+</div>
+
+<script>
+    const yesBtn = document.getElementById("yes");
+    const noBtn = document.getElementById("no");
+    const box = document.getElementById("box");
+    const timerText = document.getElementById("timer");
+
+    let timeLeft = 10;
+    let noSize = 18;
+
+    const countdown = setInterval(() => {
+        timeLeft--;
+        timerText.innerText = `Time left: ${timeLeft}s`;
+
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            box.innerHTML = "<h1>Wow you have me…<br>BREAKUP 💔</h1>";
+        }
+    }, 1000);
+
+    yesBtn.addEventListener("click", () => {
+        // move YES button
+        const x = Math.random() * 200;
+        const y = Math.random() * 150;
+        yesBtn.style.left = x + "px";
+        yesBtn.style.top = y + "px";
+
+        // make NO button bigger
+        noSize += 5;
+        noBtn.style.fontSize = noSize + "px";
+        noBtn.style.padding = (12 + noSize/3) + "px";
+
+        // reset timer slightly (optional cute mercy)
+        timeLeft = 10;
+    });
+
+    noBtn.addEventListener("click", () => {
+        box.innerHTML = "<h1>OMG YOU CLICKED NO 😭💔</h1>";
+        clearInterval(countdown);
+    });
+</script>
+
+</body>
+</html>
