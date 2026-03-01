@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Valentine 💘</title>
+<title>Do You Love Me 💔</title>
 
 <style>
     body {
@@ -22,7 +22,7 @@
         border-radius: 25px;
         box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         position: relative;
-        width: 350px;
+        width: 360px;
         height: 300px;
     }
 
@@ -32,7 +32,7 @@
 
     #timer {
         color: #ff4d88;
-        font-size: 18px;
+        font-size: 20px;
         margin-bottom: 15px;
     }
 
@@ -56,7 +56,7 @@
     #no {
         background: #333;
         color: white;
-        left: 190px;
+        left: 200px;
         top: 170px;
     }
 </style>
@@ -65,20 +65,26 @@
 <body>
 
 <div class="box" id="box">
-    <div id="timer">Time left: 10s</div>
+    <div id="timer">Time left: 3s</div>
     <h1>Do you love me? 💖</h1>
 
     <button id="yes">Yes 💕</button>
     <button id="no">No 💔</button>
 </div>
 
+<!-- Sad meme sound -->
+<audio id="sadSound">
+    <source src="sad.mp3" type="audio/mpeg">
+</audio>
+
 <script>
     const yesBtn = document.getElementById("yes");
     const noBtn = document.getElementById("no");
     const box = document.getElementById("box");
     const timerText = document.getElementById("timer");
+    const sadSound = document.getElementById("sadSound");
 
-    let timeLeft = 10;
+    let timeLeft = 3;
     let noSize = 18;
 
     const countdown = setInterval(() => {
@@ -87,29 +93,28 @@
 
         if (timeLeft <= 0) {
             clearInterval(countdown);
-            box.innerHTML = "<h1>Wow you have me…<br>BREAKUP 💔</h1>";
+            sadSound.play();
+            box.innerHTML = "<h1>I knew it<br>BYEEE BREAK UP 💔</h1>";
         }
     }, 1000);
 
     yesBtn.addEventListener("click", () => {
-        // move YES button
         const x = Math.random() * 200;
         const y = Math.random() * 150;
         yesBtn.style.left = x + "px";
         yesBtn.style.top = y + "px";
 
-        // make NO button bigger
-        noSize += 5;
+        noSize += 6;
         noBtn.style.fontSize = noSize + "px";
         noBtn.style.padding = (12 + noSize/3) + "px";
 
-        // reset timer slightly (optional cute mercy)
-        timeLeft = 10;
+        timeLeft = 3;
     });
 
     noBtn.addEventListener("click", () => {
-        box.innerHTML = "<h1>OMG YOU CLICKED NO 😭💔</h1>";
         clearInterval(countdown);
+        sadSound.play();
+        box.innerHTML = "<h1>আমি তো ভালা না,<br>ভালা লইয়াই থাকো 💔</h1>";
     });
 </script>
 
